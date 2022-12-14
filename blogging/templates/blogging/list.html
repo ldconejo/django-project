@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Recent Posts</h1>
+    {% comment %} Here is where the query happens {% endcomment %}
+    {% for post in posts %}
+    <h2>
+        <a href="{% url 'blog_detail' post.pk %}">{{ post }}</a>
+    </h2>
+    <p class="byline">
+        Posted by {{ post.author.username }} &mdash; {{ post.published_date }}
+    </p>
+    <div class="post_body">
+        {{ post.text }}
+    </div>
+    <ul class="categories">
+        {% for category in post.categories.all %}
+            <li>{{ category }}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endblock %}
